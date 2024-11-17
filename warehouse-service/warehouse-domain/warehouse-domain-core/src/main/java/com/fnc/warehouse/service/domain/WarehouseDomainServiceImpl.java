@@ -1,55 +1,55 @@
-//package com.fnc.warehouse.service.domain;
-//
-//import com.fns.warehouse.service.domain.entity.*;
-//import com.fns.warehouse.service.domain.event.*;
-//import com.fns.warehouse.service.domain.exception.WarehouseDomainException;
-//import com.fns.warehouse.service.domain.valueobject.Location;
-//import com.fns.warehouse.service.domain.valueobject.UserRoleType;
-//import com.fns.warehouse.service.domain.valueobject.TransferStatus;
-//import com.fns.warehouse.service.domain.valueobject.TransferType;
-//import com.fns.domain.valueobject.*;
-//
+package com.fnc.warehouse.service.domain;
+
+import com.fnc.warehouse.service.domain.entity.*;
+import com.fnc.warehouse.service.domain.event.*;
+import com.fnc.warehouse.service.domain.exception.WarehouseDomainException;
+import com.fnc.warehouse.service.domain.valueObject.Location;
+import com.fnc.warehouse.service.domain.valueObject.UserRoleType;
+import com.fnc.warehouse.service.domain.valueObject.TransferStatus;
+import com.fnc.warehouse.service.domain.valueObject.TransferType;
+import com.fnc.domain.valueObject.*;
+
 //import com.fns.domain.event.publisher.DomainEventPublisher;
-//
-//import java.time.ZonedDateTime;
-//import java.util.UUID;
-//
-//public class WarehouseDomainServiceImpl implements WarehouseDomainService {
-//
-//    @Override
-//    public WarehouseCreatedEvent createWarehouse(String name, Location location) throws WarehouseDomainException {
-//        Warehouse warehouse = Warehouse.builder()
-//                .warehouseId(new WarehouseId(UUID.randomUUID()))
-//                .name(name)
-//                .location(location)
-//                .build();
-//
-//        return new WarehouseCreatedEvent(warehouse, ZonedDateTime.now());
-//    }
-//
-//    @Override
-//    public WarehouseUpdatedEvent updateWarehouse(Warehouse warehouse, Location newLocation, String newName) throws WarehouseDomainException {
-//        if (newLocation != null) {
-//            warehouse.updateLocation(newLocation);
-//        }
-//        if (newName != null && !newName.isEmpty()) {
-//            warehouse.updateName(newName);
-//        }
-//        return new WarehouseUpdatedEvent(warehouse, ZonedDateTime.now());
-//    }
-//
-//    @Override
-//    public WarehouseDeletedEvent deleteWarehouse(Warehouse warehouse) throws WarehouseDomainException {
-//        warehouse.deactivateWarehouse();
-//        return new WarehouseDeletedEvent(warehouse, ZonedDateTime.now());
-//    }
-//
-//    @Override
-//    public Warehouse assignWarehouseAdmin(Warehouse warehouse, User admin) throws WarehouseDomainException {
-//        warehouse.assignAdmin(admin);
-//        return warehouse;
-//    }
-//
+
+import java.time.ZonedDateTime;
+import java.util.UUID;
+
+public class WarehouseDomainServiceImpl implements WarehouseDomainService {
+
+    @Override
+    public WarehouseCreatedEvent createWarehouse(String name, Location location) throws WarehouseDomainException {
+        Warehouse warehouse = Warehouse.builder()
+                .warehouseId(new WarehouseId(UUID.randomUUID()))
+                .name(name)
+                .location(location)
+                .build();
+
+        return new WarehouseCreatedEvent(warehouse, ZonedDateTime.now());
+    }
+
+    @Override
+    public WarehouseUpdatedEvent updateWarehouse(Warehouse warehouse, Location newLocation, String newName) throws WarehouseDomainException {
+        if (newLocation != null) {
+            warehouse.updateLocation(newLocation);
+        }
+        if (newName != null && !newName.isEmpty()) {
+            warehouse.updateName(newName);
+        }
+        return new WarehouseUpdatedEvent(warehouse, ZonedDateTime.now());
+    }
+
+    @Override
+    public WarehouseDeletedEvent deleteWarehouse(Warehouse warehouse) throws WarehouseDomainException {
+        warehouse.deactivateWarehouse();
+        return new WarehouseDeletedEvent(warehouse, ZonedDateTime.now());
+    }
+
+    @Override
+    public Warehouse assignWarehouseAdmin(Warehouse warehouse, User admin) throws WarehouseDomainException {
+        warehouse.assignAdmin(admin);
+        return warehouse;
+    }
+
 //    @Override
 //    public StockCreatedEvent createStock(UUID warehouseId, UUID productId, int quantity) {
 //
@@ -94,7 +94,7 @@
 //        event.fire();
 //        return event;
 //    }
-//
+
 //    @Override
 //    public StockTransferApprovedEvent approveStockTransfer(Stock sourceStock, Stock destinationStock, int quantity, DomainEventPublisher<StockTransferApprovedEvent> publisher) throws WarehouseDomainException {
 //        if (quantity <= 0) {
@@ -135,16 +135,16 @@
 //        event.fire();
 //        return event;
 //    }
+
+//    private void validateSuperAdminAccess(User user) throws WarehouseDomainException {
+//        if (user.getUserRole().getType() != UserRoleType.SUPER_ADMIN) {
+//            throw new WarehouseDomainException("Only Super Admins can perform this action.");
+//        }
+//    }
 //
-////    private void validateSuperAdminAccess(User user) throws WarehouseDomainException {
-////        if (user.getUserRole().getType() != UserRoleType.SUPER_ADMIN) {
-////            throw new WarehouseDomainException("Only Super Admins can perform this action.");
-////        }
-////    }
-////
-////    private void validateAdminAccess(User user) {
-////        if (user.getUserRole().getType() != UserRoleType.SUPER_ADMIN && user.getUserRole().getType() != UserRoleType.WH_ADMIN) {
-////            throw new IllegalStateException("Only Super Admins or Warehouse Admins can manage inventory.");
-////        }
-////    }
-//}
+//    private void validateAdminAccess(User user) {
+//        if (user.getUserRole().getType() != UserRoleType.SUPER_ADMIN && user.getUserRole().getType() != UserRoleType.WH_ADMIN) {
+//            throw new IllegalStateException("Only Super Admins or Warehouse Admins can manage inventory.");
+//        }
+//    }
+}
